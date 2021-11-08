@@ -1,0 +1,8 @@
+.small-card {
+  display: inline-block;
+  
+}
+.content {
+  display: grid;
+  justify-content: start;
+}
