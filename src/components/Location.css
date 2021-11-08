@@ -1,8 +1,12 @@
 .small-card {
   display: inline-block;
-  
 }
 .content {
-  display: grid;
-  justify-content: start;
+  position:absolute;
+  display: inline-block;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(50%);
 }

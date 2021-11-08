@@ -10,7 +10,7 @@ const Home: React.FC = () => {
           <IonTitle>Geolocation Sample Application</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen forceOverscroll>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Blank</IonTitle>

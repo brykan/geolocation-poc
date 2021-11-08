@@ -1,15 +1,14 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon, IonItem, IonLabel, IonList, IonText } from '@ionic/react';
-import { locationSharp } from 'ionicons/icons'
-import { useWatchPosition } from '../hooks/Geolocation';
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
+import { useWatchPosition, useCheckPermission } from '../hooks/Geolocation';
 import './Location.css';
 
 interface LocationProps { }
-
 const Location: React.FC<LocationProps> = () => {
   const currentLocation = useWatchPosition();
+  const isPermissionEnabled = useCheckPermission();
   return (
     <div className="container">
-      {currentLocation ?
+      {isPermissionEnabled ?
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>
@@ -28,7 +27,10 @@ const Location: React.FC<LocationProps> = () => {
           </IonCardContent>
         </IonCard>
         :
-        <div />
+        <div className="content">
+          <strong>Unable to fetch current location</strong>
+          <p>Geolocation permissions are disabled for this application</p>
+        </div>
       }
     </div>
   );
