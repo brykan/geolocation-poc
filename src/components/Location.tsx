@@ -1,10 +1,10 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonItem, IonLabel, IonList } from '@ionic/react';
+
 import { useWatchPosition, useCheckPermission } from '../hooks/Geolocation';
 import './Location.css';
 
-interface LocationProps { }
-const Location: React.FC<LocationProps> = () => {
-  const currentLocation = useWatchPosition();
+const Location: React.FC<Record<string,never>> = () => {
+  const {error,position} = useWatchPosition();
   const isPermissionEnabled = useCheckPermission();
   return (
     <div className="container">
@@ -18,12 +18,13 @@ const Location: React.FC<LocationProps> = () => {
           <IonCardContent >
             <IonList>
               <IonItem class='ion-no-padding'>
-                <IonLabel>Latitude </IonLabel>{currentLocation.position?.coords.latitude}
+                <IonLabel>Latitude </IonLabel>{position?.coords.latitude}
               </IonItem>
               <IonItem class='ion-no-padding'>
-                <IonLabel>Longitude </IonLabel>{currentLocation.position?.coords.longitude}
+                <IonLabel>Longitude </IonLabel>{position?.coords.longitude}
               </IonItem>
             </IonList>
+
           </IonCardContent>
         </IonCard>
         :
