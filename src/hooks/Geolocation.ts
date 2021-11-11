@@ -10,18 +10,16 @@ interface PositionReturn {
 }
 export function useWatchPosition(): PositionReturn {
     const [position, setPosition] = useState<Position>()
-    const [errorMsg, setErrorMsg] = useState()
+    const [error, setError] = useState()
     const [watch, setWatch] = useState<string>()
-
     useEffect(() => {
         if (!isGeolocationAvailable()) {
             return;
         }
         if (!watch) {
             Geolocation.watchPosition({ enableHighAccuracy: true }, (position: Position | null, error) => {
-                console.log(position)
                 if (error) {
-                    setErrorMsg(error)
+                    setError(error)
                 }
                 if (position) {
                     setPosition(position)
@@ -38,20 +36,5 @@ export function useWatchPosition(): PositionReturn {
             }
         }
     }, [])
-
-    return { error: errorMsg, position }
-}
-export function useCheckPermission(): boolean {
-    const [geolocationPermission, setGeolocationPermission] = useState(false)
-    useEffect(() => {
-        Geolocation.checkPermissions().then((perm) => {
-            if (perm.location == 'granted') {
-                setGeolocationPermission(true)
-            } else {
-                setGeolocationPermission(false)
-            }
-
-        })
-    }, [])
-    return geolocationPermission && isGeolocationAvailable()
+    return { error: error, position }
 }
